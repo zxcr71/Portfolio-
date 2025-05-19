@@ -171,7 +171,26 @@
     playMusic();
   });
 </script>
-  <body>
+  <body> 
+    <script>
+  window.addEventListener("load", function () {
+    const bgMusic = document.getElementById("bgMusic");
+
+    // First attempt to play
+    const tryPlay = () => {
+      bgMusic.play().then(() => {
+        console.log("Music autoplayed");
+      }).catch(() => {
+        // Fallback on interaction
+        document.body.addEventListener("click", () => {
+          bgMusic.play();
+        }, { once: true });
+      });
+    };
+
+    tryPlay();
+  });
+    </script>
   <div class="glitch-lines"></div>
   <audio id="bgMusic" autoplay loop>
   <source src="mus.mp3" type="audio/mpeg">
