@@ -154,11 +154,28 @@
 }
 
   </style>
-</head><body>
+</head> <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const audio = document.getElementById("bgMusic");
+
+    // Try to play automatically
+    const playMusic = () => {
+      audio.play().catch(() => {
+        // If autoplay fails (e.g., due to browser policy), wait for user interaction
+        document.body.addEventListener('click', () => {
+          audio.play();
+        }, { once: true });
+      });
+    };
+
+    playMusic();
+  });
+</script>
+  <body>
   <div class="glitch-lines"></div>
-  <audio autoplay loop>
-    <source src="mus.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
+  <audio id="bgMusic" autoplay loop>
+  <source src="mus.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
   </audio>  <section class="hero">
     <div class="thunder-bolt" style="left: 20%; animation-delay: 0s;"></div>
     <div class="thunder-bolt" style="left: 50%; animation-delay: 1s;"></div>
